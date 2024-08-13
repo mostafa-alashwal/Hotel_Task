@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Hotel_Task.Models.Entities.Agent>
+
+@{
+    ViewData["Title"] = "Agents List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Remark</th>
+            </tr>
+    </thead>
+    <tbody>
+        @foreach (var agent in Model)
+        {
+            <tr>
+                <td>@agent.FirstName</td>
+                <td>@agent.LastName</td>
+                <td>@agent.UserName</td>
+                <td>@agent.Email</td>
+                <td>@agent.Address</td>
+                <td>@agent.Remake</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@agent.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    <!-- Optional: Include an Edit button if editing functionality is implemented -->
+                    <a href="@Url.Action("Edit", new { id = agent.Id })" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Add")" class="btn btn-primary">Add New Agent</a>
